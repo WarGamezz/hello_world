@@ -214,9 +214,21 @@ print('Hello {}. you are {}'.format(name, age))
 # But if you insert the variable names, you get the added perk of being able to pass objects and then reference parameters and methods in between the braces:
 person = {'name': 'Eric', 'age': 27}
 print("Hello {name}. You are {age}.".format(name=person['name'], age=person['age']))
+# You can allso pass the dictionary in a different way
+person = {'name': 'Eric', 'age': 27}
+print("Hello {0[name]}. You are {1[age]}.".format(person, person))
 # You can also use ** to do this neat trick with dictionaries. If you had the variables you wanted to pass to .format() in a dictionary, then you could just unpack it with .format(**some_dict) and reference the values by key in the string, like this:
 person = {'name': 'Eric', 'age': 27}
 print("Hello {name}. You are {age}.".format(**person))
+# This is actually quite usefull for repeateable values for example (placeholders are numbered from 0 up):
+tag = 'h1'
+sentence = 'This is the headline'
+print('<{0}>{1}</{0}>'.format(tag, sentence))
+# Instead dictionaries you can also use lists:
+l = ['Eric', '27']
+print('Hello, {0[0]}. Your are {0[1]}.'.format(l))
+# You can also pass on key words values directly like so:
+print('Hello {name}. You are {age}'.format(name='Eric', age='27'))
 
 #? Formatted string literals
 #A formatted string literal or f-string is a string literal that is prefixed with 'f' or 'F'. These strings may contain replacement fields, which are expressions delimited by curly braces {}. While other string literals always have a constant value, formatted strings are really expressions evaluated at run time.
@@ -246,6 +258,12 @@ print(f'The comedian is {comedian['name']}, aged {comedian['age']}.') #single qu
 print(f"{{74}}") #shall print {74}
 print(f"{{{74}}}") #shall print {74}
 print(f"{{{{74}}}}") #shall print {{74}}
+
+#! Format Specification Mini-Language
+
+
+
+
 
 #! Showing all methods available to the string
 name = 'Eric'
