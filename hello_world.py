@@ -33,7 +33,7 @@ string2 = "world"
 print(string1 + string2) #you can simply add strings together by using + signs in between
 print(len(string1)) # you can figure out the length of the string using len(string)
 
-#! Slice
+#! Slicning
 string1 = "Hello World"
 #Return a slice object representing the set of indices specified by range(start, stop, step)
 #The slicing operator [] is actually being used in the above code with a slice() object using the : notation (which is only valid within []), i.e.:
@@ -46,6 +46,22 @@ print(string1[::-1])    # all items in the array, reversed
 print(string1[1::-1])   # the first two items, reversed
 print(string1[:-3:-1])  # the last two items, reversed
 print(string1[-3::-1])  # everything except the last two items, reversed
+
+#! Slicing continued
+my_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+#          0  1  2  3  4  5  6  7  8  9             positive index
+#        -10 -9 -8 -7 -6 -5 -4 -3 -2 -1             negative index
+# 
+# list[start:end:step] - positive and negative indexes can be mixed and matched
+
+print(my_list[6]) #this will return index 6 = number 6
+print(my_list[-4])  #this will return index -4 = also number 6 
+print(my_list[0:6]) #will include range from 0-5 (start index is inclusive, end index is not) = numbers from 0-5
+print(my_list[-10:-5]) #will include range from -10 - (-6) = numbers 0-4
+print(my_list[-8:7]) #will include range from -8-6 = number 2-6  
+
+
+
 
 #! String methods
 #str.capitalize() Return a copy of the string with its first character capitalized and the rest lowercased.
@@ -240,3 +256,9 @@ print(f'The comedian is {comedian['name']}, aged {comedian['age']}.') #single qu
 print(f"{{74}}") #shall print {74}
 print(f"{{{74}}}") #shall print {74}
 print(f"{{{{74}}}}") #shall print {{74}}
+
+#! Showing all methods available to the string
+name = 'Eric'
+print(dir(name)) #dir function will show all methods available for that string
+print(help(str)) #will show you everything about the class string
+print(help(str.upper)) #will print help regarding upper method of str class
