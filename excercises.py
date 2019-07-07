@@ -25,9 +25,3 @@ print('Length of the inputed string = ' + str(len(string)))
 #sample string google.com
 #expected result {'o':3, 'g':2, '.':1, 'e':1, 'l':1, 'm':1, 'c':1}
 
-def string_length(test):
-    length = 0
-    for char in test:
-        length += 1
-    return length
-print('Length of the inputed string = ' + str(string_length(input('Input random string here: '))))
