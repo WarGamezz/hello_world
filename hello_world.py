@@ -74,6 +74,9 @@ print('where' in 'Tell me where is the first l in this string')
 
 #str.format() - Format specified value and insert them inside the string's placeholder. The placeholder is defined using curly brackets: {}.
 print("For only {price:.2f} dollars!".format(price = 49)) #in this case format price to be fixed point, two-decimal format
+#Here's the actual example of when that'd be usefull. instead of writing print(variable + ' ' + variable2 + ' ' + variable3 ' ' + variable4) we can use formating and variable placeholders:
+variable, variable2, variable3, variable4, variable5 = 'Hello', 'darkness', 'my', 'old', 'friend'
+print('{} {} {} {}'.format(variable, variable2, variable3, variable4, variable5))
 
 #str.isalnum() - Returns True if all the characters are alphanumeric, meaning alphabet letters (a-z) and numbers (0-9). Not alphanumeric examples: (space)!@#$%^&?
 print('Is this string alphanumbeic? I gues not ^_^'.isalnum()) #returns false
@@ -185,3 +188,55 @@ print('This is the string of few characters'.zfill(50))
 #! Delimiters
 #The following tokens serve as delimiters in the grammar
 # (     )   [   ]   {   }   ,   :   .   ;   @   =   ->   +=     -=   *=     /=    //=    %=   @=     &=      |=      ^=      >>=     <<=      **=  
+
+
+#! F-Strings
+#As of Python 3.6, f-strings are a great new way to format strings. Not only are they more readable, more concise, and less prone to error than other ways of formatting, but they are also faster!
+
+#? printf-style String Formatting
+# String objects have one unique built-in operation: the % operator (modulo). This is also known as the string formatting or interpolation operator. Given format % values (where format is a string), % conversion specifications in format are replaced with zero or more elements of values. The syntax goes like that. 'Apple, banana, and %s are the best %s ever!' % ('orange', 'fruits')
+print('Apple, banana, and %s are the best %s ever' % ('orange', 'fruits'))
+# The more variables/operators is there, the more convoluted the entire thing becomes.
+
+#? str.format String Formatting
+# As described above it's the most commonly used way of formatting. Format strings contain “replacement fields” surrounded by curly braces {}. Anything that is not contained in braces is considered literal text, which is copied unchanged to the output. The syntax goes like that str.format(args). For example 'There two types of {}, blue and {}.'.format('flowers', 'yellow')
+print('There two types of {}, blue and {}'.format('flowers', 'yellow'))
+# You can reference variables in any order by referencing their index:
+name = 'Eric'
+age = 27
+print('Hello {}. you are {}'.format(name, age))
+# But if you insert the variable names, you get the added perk of being able to pass objects and then reference parameters and methods in between the braces:
+person = {'name': 'Eric', 'age': 27}
+print("Hello {name}. You are {age}.".format(name=person['name'], age=person['age']))
+# You can also use ** to do this neat trick with dictionaries. If you had the variables you wanted to pass to .format() in a dictionary, then you could just unpack it with .format(**some_dict) and reference the values by key in the string, like this:
+person = {'name': 'Eric', 'age': 27}
+print("Hello {name}. You are {age}.".format(**person))
+
+#? Formatted string literals
+#A formatted string literal or f-string is a string literal that is prefixed with 'f' or 'F'. These strings may contain replacement fields, which are expressions delimited by curly braces {}. While other string literals always have a constant value, formatted strings are really expressions evaluated at run time.
+name = 'Eric'
+age = 27
+print(f'Hello {name}. You are {age}')
+
+#Because f-strings are evaluated at runtime, you can put any and all valid Python expressions in them. This allows you to do some nifty things. Like calling functions:
+name = 'Eric'
+age = 27
+def lowercase (input):
+    return input.lower()
+print(f'Hello {lowercase(name)}. You are {age}.')
+# Or methodes directly
+print(f'Hello {name.lower()}, you are {age}.')
+
+# Dictionaries.
+# Speaking of quotation marks, watch out when you are working with dictionaries. If you are going to use single quotation marks for the keys of the dictionary, then remember to make sure you’re using double quotation marks for the f-strings containing the keys. This will work:
+comedian = {'name': 'Eric Idle', 'age': 74}
+print(f"The comedian is {comedian['name']}, aged {comedian['age']}.")
+# But this will not
+comedian = {'name': 'Eric Idle', 'age': 74}
+print(f'The comedian is {comedian['name']}, aged {comedian['age']}.') #single quotation will close out the string.
+
+#Braces
+#In order to make a brace appear in your string, you must use double braces. Note that using triple braces will result in there being only single braces in your string. However, you can get more braces to show if you use more than triple braces.
+print(f"{{74}}") #shall print {74}
+print(f"{{{74}}}") #shall print {74}
+print(f"{{{{74}}}}") #shall print {{74}}
