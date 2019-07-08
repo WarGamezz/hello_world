@@ -24,3 +24,5 @@ print('Length of the inputed string = ' + str(len(string)))
 #! Write a python program to count the number of the characers (character frequency) in a string
 #sample string google.com
 #expected result {'o':3, 'g':2, '.':1, 'e':1, 'l':1, 'm':1, 'c':1}
+
+
