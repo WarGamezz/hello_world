@@ -196,7 +196,14 @@ print('This is the string of few characters'.zfill(50))
 # (     )   [   ]   {   }   ,   :   .   ;   @   =   ->   +=     -=   *=     /=    //=    %=   @=     &=      |=      ^=      >>=     <<=      **=  
 
 
-#! F-Strings
+#! String Formatting
+# Some simple format string examples:
+# "First, thou shalt count to {0}"  # References first positional argument
+# "Bring me a {}"                   # Implicitly references the first positional argument
+# "From {} to {}"                   # Same as "From {0} to {1}"
+# "My quest is {name}"              # References keyword argument 'name'
+# "Weight in tons {0.weight}"       # 'weight' attribute of first positional arg
+# "Units destroyed: {players[0]}"   # First element of keyword argument 'players'.
 #As of Python 3.6, f-strings are a great new way to format strings. Not only are they more readable, more concise, and less prone to error than other ways of formatting, but they are also faster!
 
 #? printf-style String Formatting
@@ -220,7 +227,7 @@ print("Hello {0[name]}. You are {1[age]}.".format(person, person))
 # You can also use ** to do this neat trick with dictionaries. If you had the variables you wanted to pass to .format() in a dictionary, then you could just unpack it with .format(**some_dict) and reference the values by key in the string, like this:
 person = {'name': 'Eric', 'age': 27}
 print("Hello {name}. You are {age}.".format(**person))
-# This is actually quite usefull for repeateable values for example (placeholders are numbered from 0 up):
+# This is actually quite usefull for repeateable values for example (placeholders {positional arguments} are numbered from 0 up):
 tag = 'h1'
 sentence = 'This is the headline'
 print('<{0}>{1}</{0}>'.format(tag, sentence))
@@ -261,9 +268,35 @@ print(f"{{{{74}}}}") #shall print {{74}}
 
 #! Format Specification Mini-Language
 
+# The grammar for a replacement field is as follows:
+
+# replacement_field ::=  "{" [field_name] ["!" conversion] [":" format_spec] "}"
+# field_name        ::=  arg_name ("." attribute_name | "[" element_index "]")*
+# arg_name          ::=  [identifier | integer]
+# attribute_name    ::=  identifier
+# element_index     ::=  integer | index_string
+# index_string      ::=  <any source character except "]"> +
+# conversion        ::=  "r" | "s"
+# format_spec       ::=  <described in the next section> #https://docs.python.org/2/library/string.html#formatspec
+
+# In less formal terms, the replacement field can start with a field_name that specifies the object whose value is to be formatted and inserted into the output instead of the replacement field. The field_name is optionally followed by a conversion field, which is preceded by an exclamation point '!', and a format_spec, which is preceded by a colon ':'. These specify a non-default format for the replacement value.
+
+#The general form of a standard format specifier is:
+
+# format_spec ::=  [[fill]align][sign][#][0][width][,][.precision][type]
+# fill        ::=  <any character>
+# align       ::=  "<" | ">" | "=" | "^"
+# sign        ::=  "+" | "-" | " "
+# width       ::=  integer
+# precision   ::=  integer
+# type        ::=  "b" | "c" | "d" | "e" | "E" | "f" | "F" | "g" | "G" | "n" | "o" | "s" | "x" | "X" | "%"
+# The ',' option signals the use of a comma for a thousands separator.
 
 
-
+print("Eric's {} is {:^20}".format('age', 27)) #prints Eric's age is (9 empty spaces) 27 (9 empty spaces) for a total of 20 and centers 27 in the middle
+print("Eric's {} is {:>20}".format('age', 27)) #prints Eric's age is (18 empty spaces) 27 to fill up the width
+print("Eric's {} is {:.2f}".format('age', 27)) # : - format spec, . - precission, 2 - how many digits should be displayed after the decimal point for a floating point value formatted with 'f', and type f - Displays the number as a fixed-point number. The default precision is 6.
+print(("Eric's {} is {:06}".format('age', 27))) #fill up 4 zeros prior to 27 to achieve total padding of 6
 
 #! Showing all methods available to the string
 name = 'Eric'

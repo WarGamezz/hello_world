@@ -1,1 +1,3 @@
-print('Hello {name}. You are {age}'.format(name='Eric', age='27'))
+import datetime
+test_date = datetime.date.today()
+print('{0:%B %d, %Y} fell on a {0:%A} and was the {0:%j} day of the year.'.format(test_date))
